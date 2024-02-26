@@ -1,4 +1,4 @@
-
+//calculadora para hacer calculos basico, queria poner que el resultado se guarde y se pueda seguir usando pero se me hacia muy largo, asi que preferi dejarlo asi
 do {
     var accion = prompt("Escribi el tipo de operacion a realizar (SUMA, RESTA, MULTI, DIVI o SALIR)");
     if (accion === null || accion === "") {
