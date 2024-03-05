@@ -37,8 +37,6 @@ function addProduct() {
     document.getElementById("searchProduct").style.display = "flex";
 }
 
-
-
 function editProduct(index) {
     const productName = prompt("Nuevo nombre del producto:");
     const productPrice = prompt("Nuevo precio:");
@@ -64,6 +62,7 @@ function addToCart(index, quantity) {
     const productToAdd = { ...products[index], quantity };
     cart.push(productToAdd);
     displayCart();
+    document.getElementById("botonFactura").style.display = "block";
 }
 
 function displayCart() {
@@ -127,7 +126,6 @@ function generateFactura() {
     document.body.appendChild(invoice);
 }
 
-
 function searchProducts() {
     const searchInput = document.getElementById("searchProduct").value.toLowerCase();
     const filteredProducts = products.filter(product => product.name.toLowerCase().includes(searchInput));
@@ -137,40 +135,32 @@ function searchProducts() {
 function displayProducts(productsArray = products) {
     const productList = document.getElementById("productList");
     productList.innerHTML = "";
-    productsArray.forEach((product, index) => {
-    
+    productsArray.forEach((product, index) => {    
         const card = document.createElement("div");
         card.classList.add("card");
-
         const productName = document.createElement("h3");
         productName.textContent = product.name;
         card.appendChild(productName);
-
         const productDescription = document.createElement("p");
         productDescription.textContent = product.description;
         card.appendChild(productDescription);
-
         const productPrice = document.createElement("span");
         productPrice.textContent = "$" + product.price;
         card.appendChild(productPrice);
-        
         const quantityInput = document.createElement("input");
         quantityInput.type = "number";
         quantityInput.placeholder = "Cantidad";
         quantityInput.value = product.quantity || 1; 
         card.appendChild(quantityInput);
-
         const addToCartButton = document.createElement("button");
         addToCartButton.textContent = "Agregar al carrito";
         addToCartButton.onclick = () => addToCart(index, parseInt(quantityInput.value));
         card.appendChild(addToCartButton);
         productList.appendChild(card);
-
         const editButton = document.createElement("button");
         editButton.textContent = "Editar";
         editButton.onclick = () => editProduct(index);
         card.appendChild(editButton);
-
         const deleteButton = document.createElement("button");
         deleteButton.textContent = "Eliminar";
         deleteButton.onclick = () => deleteProduct(index);

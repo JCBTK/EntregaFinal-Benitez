@@ -26,7 +26,8 @@
 }
 
 #login input {
-    margin: 0.5rem 0rem;
+    padding: 0.5rem 0.5rem;
+    margin: 0rem 0rem 1rem 0rem;
 }
 
 body h2 {
@@ -53,7 +54,7 @@ body h2 {
 body {
     font-family: "Rajdhani", sans-serif;
     background-image: url(fondo.jpg);
-    background-size: contain;
+    background-size: cover;
 }
 
 #productForm {
