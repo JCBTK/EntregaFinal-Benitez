@@ -8,8 +8,8 @@ function login() {
     if (username === "usuario" && password === "contraseña") {
         loggedIn = true;
         document.getElementById("login").style.display = "none";
-        document.getElementById("store").style.display = "block";
-        document.getElementById("cart").style.display = "block";
+        document.getElementById("store").style.display = "flex";
+        
     } else {
         alert("Credenciales incorrectas");
     }
@@ -33,35 +33,31 @@ function addProduct() {
         quantity: productQuantity,
     });
     displayProducts();
+    document.getElementById("cart").style.display = "block";
+    document.getElementById("searchProduct").style.display = "flex";
 }
 
-function displayProducts() {
-    const productList = document.getElementById("productList");
-    productList.innerHTML = "";
-    products.forEach((product, index) => {
-        const card = document.createElement("div");
-        card.classList.add("card");
-        const productName = document.createElement("h3");
-        productName.textContent = product.name;
-        card.appendChild(productName);
-        const productDescription = document.createElement("p");
-        productDescription.textContent = product.description;
-        card.appendChild(productDescription);
-        const price = document.createElement("span");
-        price.classList.add("price");
-        price.textContent = "$" + product.price;
-        card.appendChild(price);
-        const quantityInput = document.createElement("input");
-        quantityInput.type = "number";
-        quantityInput.placeholder = "Cantidad";
-        quantityInput.value = product.quantity || 1; 
-        card.appendChild(quantityInput);
-        const addToCartButton = document.createElement("button");
-        addToCartButton.textContent = "Agregar al carrito";
-        addToCartButton.onclick = () => addToCart(index, parseInt(quantityInput.value));
-        card.appendChild(addToCartButton);
-        productList.appendChild(card);
-    });
+
+
+function editProduct(index) {
+    const productName = prompt("Nuevo nombre del producto:");
+    const productPrice = prompt("Nuevo precio:");
+    const productSize = prompt("Nuevo tamaño:");
+    const productDescription = prompt("Nueva descripción:");
+    const productQuantity = prompt("Nueva cantidad:");
+    products[index] = {
+        name: productName,
+        price: productPrice,
+        size: productSize,
+        description: productDescription,
+        quantity: productQuantity,
+    };
+    displayProducts();
+}
+
+function deleteProduct(index) {
+    products.splice(index, 1);
+    displayProducts();
 }
 
 function addToCart(index, quantity) {
@@ -85,8 +81,17 @@ function displayCart() {
         const productQuantity = document.createElement("span");
         productQuantity.textContent = "Cantidad: " + product.quantity;
         cartItem.appendChild(productQuantity);
+        const deleteFromCartButton = document.createElement("button");
+        deleteFromCartButton.textContent = "Eliminar del carrito";
+        deleteFromCartButton.onclick = () => removeFromCart(index);
+        cartItem.appendChild(deleteFromCartButton);
         cartItems.appendChild(cartItem);
     });
+}
+
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    displayCart();
 }
 
 function generateFactura() {
@@ -122,3 +127,53 @@ function generateFactura() {
     document.body.appendChild(invoice);
 }
 
+
+function searchProducts() {
+    const searchInput = document.getElementById("searchProduct").value.toLowerCase();
+    const filteredProducts = products.filter(product => product.name.toLowerCase().includes(searchInput));
+    displayProducts(filteredProducts);
+}
+
+function displayProducts(productsArray = products) {
+    const productList = document.getElementById("productList");
+    productList.innerHTML = "";
+    productsArray.forEach((product, index) => {
+    
+        const card = document.createElement("div");
+        card.classList.add("card");
+
+        const productName = document.createElement("h3");
+        productName.textContent = product.name;
+        card.appendChild(productName);
+
+        const productDescription = document.createElement("p");
+        productDescription.textContent = product.description;
+        card.appendChild(productDescription);
+
+        const productPrice = document.createElement("span");
+        productPrice.textContent = "$" + product.price;
+        card.appendChild(productPrice);
+        
+        const quantityInput = document.createElement("input");
+        quantityInput.type = "number";
+        quantityInput.placeholder = "Cantidad";
+        quantityInput.value = product.quantity || 1; 
+        card.appendChild(quantityInput);
+
+        const addToCartButton = document.createElement("button");
+        addToCartButton.textContent = "Agregar al carrito";
+        addToCartButton.onclick = () => addToCart(index, parseInt(quantityInput.value));
+        card.appendChild(addToCartButton);
+        productList.appendChild(card);
+
+        const editButton = document.createElement("button");
+        editButton.textContent = "Editar";
+        editButton.onclick = () => editProduct(index);
+        card.appendChild(editButton);
+
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "Eliminar";
+        deleteButton.onclick = () => deleteProduct(index);
+        card.appendChild(deleteButton);
+    });
+}
