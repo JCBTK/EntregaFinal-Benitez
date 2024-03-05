@@ -21,12 +21,14 @@
                 <input type="text" id="productSize" placeholder="Talle">
                 <input type="text" id="productDescription" placeholder="Descripción">
                 <input type="number" id="productQuantity" placeholder="Cantidad">
-                <button onclick="addProduct()">Agregar Producto</button>            
+                <div class="agregarProducto">
+                    <button onclick="addProduct()" >Agregar Producto</button>            
+                </div>
         </div>
-        <div id="productList"></div>
-        <div>
+        <div id="buscador">
             <input type="text" id="searchProduct" placeholder="Buscar por nombre de producto" oninput="searchProducts()" style="display: none;">
         </div>
+        <div id="productList"></div>    
     </div>
     
     <div id="cart" style="display: none;">
