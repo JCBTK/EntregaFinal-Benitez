@@ -217,7 +217,7 @@ function generateFactura() {
         item.appendChild(itemTotalElement);
         invoice.appendChild(item);
 
-        // Actualizar el stock del producto en el array 'products' y en el almacenamiento local
+        // actualizar el stock del producto en products y en el almacenamiento local
         const productIndex = products.findIndex(prod => prod.name === product.name);
         if (productIndex !== -1) {
             products[productIndex].stock -= product.quantity;
