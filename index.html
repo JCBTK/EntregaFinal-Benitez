@@ -7,24 +7,37 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body id="body">
+    <div id="register" style="display: none;">
+        <h2>Registrarse</h2>
+        <input type="text" id="newUsername" placeholder="Nuevo Usuario">
+        <input type="password" id="newPassword" placeholder="Nueva Contraseña">
+        <button onclick="register()">Registrarse</button>
+        <button onclick="showLoginForm()">Volver al inicio de sesión</button>
+    </div>
     <div id="login">
         <h2>Iniciar Sesión</h2>
         <input type="text" id="username" placeholder="Usuario">
         <input type="password" id="password" placeholder="Contraseña">
+        <button onclick="showRegisterForm()">Registrarse</button>
         <button onclick="login()">Iniciar Sesión</button>
+        
     </div>
     <div id="store" style="display: none;">
-        <h2>Programa de Venta</h2>
-        <div id="productForm">
-                <input type="text" id="productName" placeholder="Nombre del Producto">
-                <input type="number" id="productPrice" placeholder="Precio">
-                <input type="text" id="productSize" placeholder="Talle">
-                <input type="text" id="productDescription" placeholder="Descripción">
-                <input type="number" id="productQuantity" placeholder="Cantidad">
-                <div class="agregarProducto">
-                    <button onclick="addProduct()" >Agregar Producto</button>            
-                </div>
+        <div id="parteSuperior">
+            <h2>Programa de Venta</h2>
+            <button onclick="logout()">Cerrar Sesión</button>
         </div>
+        <div id="productForm">
+            <input type="text" id="productName" placeholder="Nombre del Producto">
+            <input type="number" id="productPrice" placeholder="Precio">
+            <input type="text" id="productSize" placeholder="Talle">
+            <input type="text" id="productDescription" placeholder="Descripción">
+            <input type="number" id="productStock" placeholder="Stock"> 
+            <div class="agregarProducto">
+                <button onclick="addProduct()">Agregar Producto</button>            
+            </div>
+        </div>
+        
         <div id="buscador">
             <input type="text" id="searchProduct" placeholder="Buscar por nombre de producto" oninput="searchProducts()" style="display: none;">
         </div>

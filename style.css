@@ -3,14 +3,31 @@
 #store {
     flex-direction: column;
 }
-
+#parteSuperior{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0rem 1rem;
+}
+#parteSuperior button{ 
+    background-color: #50b291;
+    color: white;
+    padding: 0.5rem;
+    border: transparent;
+    border-radius: 0.5rem;
+    transition: 0.2s;
+    &:hover{
+        background-color: #3b846b;
+    }
+}
 #store h2 {
     display: flex;
     justify-content: space-around;
 }
 
 #login {
-    translate: 0rem 10rem;
+    translate: 0rem 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -23,11 +40,26 @@
     -webkit-backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.3);
     padding: 1rem 1rem;
-}
-
-#login input {
-    padding: 0.5rem 0.5rem;
-    margin: 0rem 0rem 1rem 0rem;
+    & h2{
+        margin: 0;
+    }
+    & input, button{
+        padding: 0.5rem;
+        margin: 0.5rem;
+        width: 60%;
+        box-sizing: border-box;
+        border: solid 1px transparent;
+        border-radius: 0.5rem;
+    }
+    & button{
+        background-color: #50b291;
+        transition: 0.2s;
+        &:hover{
+            cursor: pointer;
+            color: white;
+            background-color: #3b846b;
+        }
+    }
 }
 
 body h2 {
@@ -98,6 +130,10 @@ body {
     border-radius: 0.5rem;
     padding: 1rem;
     background-color: #50b291;
+    transition: 0.2s;
+    &:hover{
+        background-color: #3b846b;
+    }
 }
 
 .card {
@@ -131,7 +167,6 @@ body {
 }
 
 .card button:hover {
-    font-weight: 600;
     background-color: transparent;
     border: none;
 }
@@ -160,7 +195,9 @@ body {
     flex-direction: row;
     justify-content: center;
 }
-
+#cartItems{
+    display: flex;
+}
 .cart-item {
     background: rgba(255, 255, 255, 0.2);
     border-radius: 16px;
@@ -169,25 +206,32 @@ body {
     -webkit-backdrop-filter: blur(13.1px);
     border: 1px solid rgba(255, 255, 255, 0.3);
     display: flex;
+    padding: 0rem 1.5rem;
+    margin: 0.5rem 1rem;
+    width: 100%;
+    height: 10rem;
+    align-items: center;
+    justify-content: center;
     flex-direction: column;
-    padding: 0.5rem;
-    margin: 0.5rem 0rem;
 }
 
 #cart button {
-    border: none;
+    border: transparent solid 1px;
     padding: 0.5rem;
     border-radius: 0.5rem;
+    background-color: white;
+    transition: 0.2s;
 }
 
 #cart button:hover {
-    border: none;
-    font-weight: 600;
+    border:transparent solid 1px;
+    background: #3b846b;
+    color: white;
 }
 
 .cart-item button {
     padding: 0.5rem;
-    border: none;
+    border: transparent;
     border-radius: 0.5rem;
 }
 
@@ -217,6 +261,7 @@ body {
     display: flex;
     flex-direction: row;
     margin-bottom: 2rem;
+    
 }
 
 #buscador #searchProduct {
@@ -237,4 +282,41 @@ body {
 }
 #searchProduct::placeholder{
     color: white;
+}
+
+#register{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    translate: 0rem 50%;
+    margin-left: 35%;
+    width: 30%;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 1rem;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 1rem;
+    & h2{
+        margin: 0;
+    }
+    & input, button{
+        padding: 0.5rem;
+        margin: 0.5rem;
+        width: 60%;
+        box-sizing: border-box;
+        border: solid 1px transparent;
+        border-radius: 0.5rem;
+    }
+    & button{
+        background-color: #50b291;
+        transition: 0.2s;
+        &:hover{
+            cursor: pointer;
+            color: white;
+            background-color: #3b846b;
+        }
+    }
 }
