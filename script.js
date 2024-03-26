@@ -3,13 +3,35 @@ let products = [];
 let cart = [];
 let users = [];
 
+
+
 //funcion iniciar sesion
 function login() {
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
+    // limpiar los campos de usuario y contraseña al iniciar sesion
+    document.getElementById("username").value = "";
+    document.getElementById("password").value = "";
+    // verificar que ambos campos estén completos
+    if (username.trim() === "" || password.trim() === "") {
+        alert("Debes ingresar un usuario y contraseña.");
+        return;
+    }
     const user = users.find(user => user.username === username && user.password === password);
     if (user) {
         loggedIn = true;
+        // modal de inicio de sesión correctamente
+        document.getElementById('loginSuccessModal').style.display = 'block';
+        // función para cerrar el modal cuando el usuario haga clic en la 'x'
+        document.getElementsByClassName('close')[1].onclick = function () {
+            document.getElementById('loginSuccessModal').style.display = 'none';
+        };
+        // cerrar el modal si el usuario hace clic fuera del contenido
+        window.onclick = function (event) {
+            if (event.target == document.getElementById('loginSuccessModal')) {
+                document.getElementById('loginSuccessModal').style.display = 'none';
+            }
+        };
         document.getElementById("login").style.display = "none";
         document.getElementById("store").style.display = "flex";
     } else {
@@ -52,6 +74,7 @@ function showLoginForm() {
     document.getElementById("register").style.display = "none";
 }
 
+
 //funcion editar producto
 function editProduct(index) {
     const productName = prompt("Nuevo nombre del producto:");
@@ -85,12 +108,22 @@ function addProduct() {
     const productSize = document.getElementById("productSize").value;
     const productDescription = document.getElementById("productDescription").value;
     let productStock = document.getElementById("productStock").value;
-    // verificar si el producto ya existe
-    const existingProductIndex = products.findIndex(product => product.name === productName);
+
+    // verificar si el producto ya existe en el catálogo con el mismo nombre, precio y descripción
+    const existingProductIndex = products.findIndex(product =>
+        product.name === productName &&
+        product.price === productPrice &&
+        product.description === productDescription
+    );
+
     if (existingProductIndex !== -1) {
-        alert("Este producto ya existe en el catálogo.");
-        return;
+        // si el producto ya existe, verificar si el tamaño es diferente
+        if (products[existingProductIndex].size === productSize) {
+            alert("Este producto ya existe en el catálogo con el mismo tamaño.");
+            return;
+        }
     }
+
     // crear un nuevo producto
     const newProduct = {
         name: productName,
@@ -99,18 +132,37 @@ function addProduct() {
         description: productDescription,
         stock: productStock,
     };
+
     // agregar el nuevo producto al array de productos
     products.push(newProduct);
+
     // guardar el array de productos actualizado
     localStorage.setItem('products', JSON.stringify(products));
+
     // mostrar los productos
     displayProducts();
     document.getElementById("searchProduct").style.display = "flex";
 
+    // modal de confirmación
+    const ProductoAgr = document.getElementById("ProductoEmergente");
+    const span = document.getElementsByClassName("close")[0];
+    ProductoAgr.style.display = "block";
+
+    // cierre modal
+    span.onclick = function() {
+        ProductoAgr.style.display = "none";
+    }
+
+    // cierre de modal
+    window.onclick = function(event) {
+        if (event.target == ProductoAgr) {
+            ProductoAgr.style.display = "none";
+        }
+    }
 }
 
 function addToCart(index, quantity) {
-    // Obtener el producto seleccionado
+    // obtener el producto seleccionado
     const productToAdd = products[index];
     // verificar si la cantidad a agregar excede el stock disponible
     if (quantity > productToAdd.stock) {
@@ -252,12 +304,19 @@ function displayProducts(productsArray = products) {
         const productName = document.createElement("h3");
         productName.textContent = product.name;
         card.appendChild(productName);
+        //mostrar descripcion
         const productDescription = document.createElement("p");
         productDescription.textContent = product.description;
         card.appendChild(productDescription);
+        //mostrar el talle del producto
+        const productSize = document.createElement("span");
+        productSize.textContent = "Talle: " + product.size;
+        card.appendChild(productSize);
+        //mostrar precio
         const productPrice = document.createElement("span");
         productPrice.textContent = "$" + product.price;
         card.appendChild(productPrice);
+        //mostrar stock
         const stock = document.createElement("span")
         stock.textContent = product.stock + " Productos en stock";
         card.appendChild(stock)
@@ -299,4 +358,8 @@ window.onload = function() {
         users = JSON.parse(storedUsers);
     }
     displayProducts();
+    
+    // limpiar los campos de inicio de sesión
+    document.getElementById("username").value = "";
+    document.getElementById("password").value = "";
 };
