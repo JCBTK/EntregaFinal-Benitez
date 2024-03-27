@@ -3,6 +3,8 @@ let products = [];
 let cart = [];
 let users = [];
 
+
+
 //funcion iniciar sesion
 function login() {
     const username = document.getElementById("username").value;
@@ -72,13 +74,14 @@ function showLoginForm() {
     document.getElementById("register").style.display = "none";
 }
 
+
 //funcion editar producto
 function editProduct(index) {
     const productName = prompt("Nuevo nombre del producto:");
     const productPrice = prompt("Nuevo precio:");
     const productSize = prompt("Nuevo tamaño:");
     const productDescription = prompt("Nueva descripción:");
-    const productStock = prompt("Nuevo stock:");
+    const productStock = prompt("Nuevo stock:"); 
     products[index] = {
         name: productName,
         price: productPrice,
@@ -88,7 +91,6 @@ function editProduct(index) {
     };
     displayProducts();
 }
-
 //funcion eliminar producto
 function deleteProduct(index) {
     products.splice(index, 1);
@@ -106,43 +108,57 @@ function addProduct() {
     const productSize = document.getElementById("productSize").value;
     const productDescription = document.getElementById("productDescription").value;
     let productStock = document.getElementById("productStock").value;
-    const productImage = document.getElementById("productImage").files[0]; // obtenemos el archivo de imagen
-    const reader = new FileReader();
-    reader.onload = function(event) {
-        const productImageUrl = event.target.result; //URL de la imagen seleccionada
-        const newProduct = {
-            name: productName,
-            price: productPrice,
-            size: productSize,
-            description: productDescription,
-            stock: productStock,
-            image: productImageUrl, // URL de la imagen en producto
-        };
-        // agregar el nuevo producto al array de productos
-        products.push(newProduct);
-        // guardar el array de productos actualizado
-        localStorage.setItem('products', JSON.stringify(products));
-        // mostrar los productos
-        displayProducts();
-        document.getElementById("searchProduct").style.display = "flex";
 
-        // modal de confirmación
-        const ProductoAgr = document.getElementById("ProductoEmergente");
-        const span = document.getElementsByClassName("close")[0];
-        ProductoAgr.style.display = "block";
+    // verificar si el producto ya existe en el catálogo con el mismo nombre, precio y descripción
+    const existingProductIndex = products.findIndex(product =>
+        product.name === productName &&
+        product.price === productPrice &&
+        product.description === productDescription
+    );
 
-        // cierre modal
-        span.onclick = function() {
+    if (existingProductIndex !== -1) {
+        // si el producto ya existe, verificar si el tamaño es diferente
+        if (products[existingProductIndex].size === productSize) {
+            alert("Este producto ya existe en el catálogo con el mismo tamaño.");
+            return;
+        }
+    }
+
+    // crear un nuevo producto
+    const newProduct = {
+        name: productName,
+        price: productPrice,
+        size: productSize,
+        description: productDescription,
+        stock: productStock,
+    };
+
+    // agregar el nuevo producto al array de productos
+    products.push(newProduct);
+
+    // guardar el array de productos actualizado
+    localStorage.setItem('products', JSON.stringify(products));
+
+    // mostrar los productos
+    displayProducts();
+    document.getElementById("searchProduct").style.display = "flex";
+
+    // modal de confirmación
+    const ProductoAgr = document.getElementById("ProductoEmergente");
+    const span = document.getElementsByClassName("close")[0];
+    ProductoAgr.style.display = "block";
+
+    // cierre modal
+    span.onclick = function() {
+        ProductoAgr.style.display = "none";
+    }
+
+    // cierre de modal
+    window.onclick = function(event) {
+        if (event.target == ProductoAgr) {
             ProductoAgr.style.display = "none";
         }
-        // cierre de modal
-        window.onclick = function(event) {
-            if (event.target == ProductoAgr) {
-                ProductoAgr.style.display = "none";
-            }
-        }
-    };
-    reader.readAsDataURL(productImage); // leer el archivo de imagen como URL
+    }
 }
 
 function addToCart(index, quantity) {
@@ -186,19 +202,12 @@ function displayCart() {
     cart.forEach((product, index) => {
         const cartItem = document.createElement("div");
         cartItem.classList.add("cart-item");
-        //mostrar nombre de producto
         const productName = document.createElement("h4");
         productName.textContent = product.name;
         cartItem.appendChild(productName);
-        //mostrar el talle del producto
-        const productSize = document.createElement("span");
-        productSize.textContent = "Talle: " + product.size;
-        card.appendChild(productSize);
-        //mostrar precio
         const productPrice = document.createElement("span");
         productPrice.textContent = "$" + product.price;
         cartItem.appendChild(productPrice);
-        //mostrar cantidad
         const productQuantity = document.createElement("span");
         productQuantity.textContent = "Cantidad: " + product.quantity;
         cartItem.appendChild(productQuantity);
@@ -289,15 +298,9 @@ function searchProducts() {
 function displayProducts(productsArray = products) {
     const productList = document.getElementById("productList");
     productList.innerHTML = "";
-    productsArray.forEach((product, index) => {
+    productsArray.forEach((product, index) => {    
         const card = document.createElement("div");
         card.classList.add("card");
-        // mostrar imagen del producto
-        const productImage = document.createElement("img");
-        productImage.src = product.image;
-        productImage.alt = product.name;
-        card.appendChild(productImage);
-        //mostrar nombre de producto
         const productName = document.createElement("h3");
         productName.textContent = product.name;
         card.appendChild(productName);
@@ -321,7 +324,7 @@ function displayProducts(productsArray = products) {
         stockInput.type = "number"; 
         stockInput.placeholder = "Stock";
         stockInput.value = product.stock || 0; 
-        card.appendChild(stockInput);
+        card.appendChild(stockInput); 
         const addToCartButton = document.createElement("button");
         addToCartButton.textContent = "Agregar al carrito";
         addToCartButton.onclick = () => addToCart(index, parseInt(stockInput.value));

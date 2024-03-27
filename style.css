@@ -76,7 +76,13 @@ body h2 {
     font-size: 2rem;
 }
 
-
+.card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    width: 200px;
+    display: inline-block;
+}
 
 .card:hover .price {
     display: block;
@@ -113,6 +119,7 @@ body {
     border: 1px solid #ffffff78;
     background: transparent;
     margin: 0.5rem;
+<<<<<<< HEAD
     color: #ffffff;
     &#productImage{
         color: transparent;
@@ -139,6 +146,9 @@ body {
 }
 #productForm label:hover {
     background-color: #3b846b;
+=======
+    color: rgb(255, 255, 255);
+>>>>>>> parent of 6cb06d4 (agregado del boton ara agregar una imagen al producto)
 }
 
 #productForm input::placeholder {
@@ -166,10 +176,6 @@ body {
 }
 
 .card {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin: 10px;
-    width: 12rem;    
     color: white;
     display: flex;
     flex-direction: column;
@@ -409,24 +415,4 @@ body {
     color: white;
     text-decoration: none;
     cursor: pointer;
-}
-.card{
-    display: flex;
-}
-.card p{
-    margin: 0;
-}
-.card h3{
-    margin: 0.5rem 0;
-}
-.card img{
-    border-radius: 1rem;
-    height: 12rem;  
-    width: 12rem;
-}
-
-#productImage{
-    color: transparent;
-    width: 100%;
-    background-color: transparent; 
 }
