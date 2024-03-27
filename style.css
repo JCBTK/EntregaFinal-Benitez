@@ -119,36 +119,7 @@ body {
     border: 1px solid #ffffff78;
     background: transparent;
     margin: 0.5rem;
-<<<<<<< HEAD
-    color: #ffffff;
-    &#productImage{
-        color: transparent;
-        border:none;
-    }
-}
-#productForm input[type="file"] {
-    display: none;
-}
-
-#productForm label {
-    display: flex;
-    height: 2rem;
-    background-color: #50b291;
-    color: #ffffff;
-    padding:0.5rem;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    margin: 0 0.5rem 0 0 ;
-    align-items: center;
-    text-align: center;
-    font-size: 0.8rem;
-    font-family: sans-serif;
-}
-#productForm label:hover {
-    background-color: #3b846b;
-=======
     color: rgb(255, 255, 255);
->>>>>>> parent of 6cb06d4 (agregado del boton ara agregar una imagen al producto)
 }
 
 #productForm input::placeholder {
