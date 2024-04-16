@@ -1,0 +1,39 @@
+{
+    "products": [
+        {   
+            "img":"./imgs/products/1.jpg",
+            "name": "camisa",
+            "price": 15000,
+            "size": "M",
+            "description": "negra"
+        },
+        {   
+            "img":"./imgs/products/2.jpg",
+            "name": "remera",
+            "price": 15000,
+            "size": "L",
+            "description": "negra"
+        },
+        {
+            "img":"./imgs/products/3.jpg",
+            "name": "pantalon",
+            "price": 150000,
+            "size": "45",
+            "description": "negro"
+        },
+        {
+            "img":"./imgs/products/4.jpg",
+            "name": "campera",
+            "price": 160000,
+            "size": "XL",
+            "description": "negra"
+        },
+        {
+            "img":"./imgs/products/5.jpg",
+            "name": "camperon",
+            "price": 180000,
+            "size": "XXL",
+            "description": "blanca"
+        }
+    ]
+}

@@ -1,12 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap');
 
+body {
+    font-family: "Rajdhani", sans-serif;
+    background-image: url(../imgs/fondo.jpg);
+    background-size: cover;
+}
+
 #store {
     flex-direction: column;
 }
 
 #parteSuperior {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     margin: 0rem 1rem;
@@ -19,19 +24,20 @@
     border: transparent;
     border-radius: 0.5rem;
     transition: 0.2s;
+}
 
-    &:hover {
-        background-color: #3b846b;
-    }
+#parteSuperior button:hover {
+    background-color: #3b846b;
 }
 
 #store h2 {
     display: flex;
     justify-content: space-around;
+    color: #50b291;
+    font-size: 2rem;
 }
 
-#login {
-    translate: 0rem 50%;
+#login, #register {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -44,114 +50,46 @@
     -webkit-backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.3);
     padding: 1rem 1rem;
-
-    & h2 {
-        margin: 0;
-    }
-
-    & input,
-    button {
-        padding: 0.5rem;
-        margin: 0.5rem;
-        width: 60%;
-        box-sizing: border-box;
-        border: solid 1px transparent;
-        border-radius: 0.5rem;
-    }
-
-    & button {
-        background-color: #50b291;
-        transition: 0.2s;
-
-        &:hover {
-            cursor: pointer;
-            color: white;
-            background-color: #3b846b;
-        }
-    }
 }
 
-body h2 {
-    color: #50b291;
-    font-size: 2rem;
+#login h2, #register h2 {
+    margin: 0;
 }
 
-.card {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin: 10px;
-    width: 200px;
-    display: inline-block;
-}
-
-.card:hover .price {
-    display: block;
-}
-
-.price {
-    display: none;
-}
-
-body {
-    font-family: "Rajdhani", sans-serif;
-    background-image: url(fondo.jpg);
-    background-size: cover;
-}
-
-#productForm {
-    display: flex;
-    align-items: center;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(13.1px);
-    -webkit-backdrop-filter: blur(13.1px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    padding: 0.5rem 1rem;
-}
-
-#productForm input {
-    width: 16.6%;
-    font-size: 1rem;
-    border-radius: 0.5rem;
-    height: 2rem;
+#login input, #login button, #register input, #register button {
     padding: 0.5rem;
-    border: 1px solid #ffffff78;
-    background: transparent;
     margin: 0.5rem;
-    color: rgb(255, 255, 255);
-}
-
-#productForm input::placeholder {
-    color: white;
-}
-
-.agregarProducto button:hover {
-    cursor: pointer;
-}
-
-.agregarProducto button {
-    display: flex;
-    align-items: center;
-    color: white;
-    height: 3rem;
-    border: 1px transparent;
+    width: 60%;
+    box-sizing: border-box;
+    border: solid 1px transparent;
     border-radius: 0.5rem;
-    padding: 1rem;
+}
+
+#login button, #register button {
     background-color: #50b291;
     transition: 0.2s;
+}
 
-    &:hover {
-        background-color: #3b846b;
-    }
+#login button:hover, #register button:hover {
+    cursor: pointer;
+    color: white;
+    background-color: #3b846b;
+}
+
+#productList {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 10px;
 }
 
 .card {
+    margin-bottom: 1rem;
+    max-width: 200px;
+    width: auto;
     color: white;
     display: flex;
     flex-direction: column;
-    align-items: stretch;
-    margin: 0rem 1rem 2rem 1rem;
+    align-items: center;
     border-radius: 1rem;
     padding: 1rem 1rem;
     background: rgba(255, 255, 255, 0.2);
@@ -160,6 +98,13 @@ body {
     backdrop-filter: blur(13.1px);
     -webkit-backdrop-filter: blur(13.1px);
     border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.card img {
+    width: 90%;
+    height: 60%;
+    border-radius: .8rem;
+    display: flex;
 }
 
 .card input {
@@ -200,12 +145,6 @@ body {
 
 #cart h2 {
     color: white;
-}
-
-#productList {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
 }
 
 #cartItems {
@@ -275,13 +214,11 @@ body {
     display: flex;
     flex-direction: row;
     margin-bottom: 2rem;
-
 }
 
 #buscador #searchProduct {
     color: white;
     display: flex;
-    margin-top: 2rem;
     height: 2rem;
     width: 70%;
     margin-left: 15%;
@@ -299,49 +236,7 @@ body {
     color: white;
 }
 
-#register {
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    align-items: center;
-    translate: 0rem 50%;
-    margin-left: 35%;
-    width: 30%;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 1rem;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    padding: 1rem;
-
-    & h2 {
-        margin: 0;
-    }
-
-    & input,
-    button {
-        padding: 0.5rem;
-        margin: 0.5rem;
-        width: 60%;
-        box-sizing: border-box;
-        border: solid 1px transparent;
-        border-radius: 0.5rem;
-    }
-
-    & button {
-        background-color: #50b291;
-        transition: 0.2s;
-
-        &:hover {
-            cursor: pointer;
-            color: white;
-            background-color: #3b846b;
-        }
-    }
-}
-
-.ProductoAgr , .modal{
+.ProductoAgr, .modal, .ProductoAgrContent, .modal-content {
     display: none;
     position: fixed;
     z-index: 1;
@@ -352,14 +247,14 @@ body {
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.674);
     backdrop-filter: blur(10px);
-    :hover{
-        box-shadow:0px 0px 4rem #50b291;
-        box-sizing: border-box;    
-    }
 }
 
+.ProductoAgr:hover, .modal:hover {
+    box-shadow: 0px 0px 4rem #50b291;
+    box-sizing: border-box;
+}
 
-.ProductoAgrContent , .modal-content {
+.ProductoAgrContent, .modal-content {
     background-color: #50b291;
     margin: 15% auto;
     padding: 20px;
@@ -367,23 +262,8 @@ body {
     width: 80%;
     border-radius: 1rem;
     color: white;
-    box-shadow:0px 0px 4rem #50b291;
+    box-shadow: 0px 0px 4rem #50b291;
     box-sizing: border-box;
     box-shadow: none;
     transition: 0.1s;
-}
-
-
-.close {
-    color: #ffffff;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: white;
-    text-decoration: none;
-    cursor: pointer;
 }
